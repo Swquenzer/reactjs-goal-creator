@@ -1,17 +1,29 @@
 {
-  "name": "test2",
-  "version": "0.1.0",
-  "private": true,
+  "name": "goal-creator",
+  "version": "1.0.0",
+  "description": "Goal Management App ",
+  "main": "index.js",
   "dependencies": {
     "bootstrap": "^3.3.7",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "react-scripts": "1.0.13"
+    "react-scripts": "^1.0.13"
   },
+  "devDependencies": {},
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Swquenzer/reactjs-goal-creator.git"
+  },
+  "author": "Stephen Quenzer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Swquenzer/reactjs-goal-creator/issues"
+  },
+  "homepage": "https://github.com/Swquenzer/reactjs-goal-creator#readme"
 }

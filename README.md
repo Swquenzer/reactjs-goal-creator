@@ -5,7 +5,8 @@ The purpose of this project is to:
 * Practice writing moduler js code
 * Practice creating extremely dynamic single page apps
 * Learn ReactJS
-* Learn Bootstrap (CSS Framework)
+* Learn Bootstrap v4 (CSS Framework)
+* Use some new npm packages (tbd)
 
 -------------------------
 ## Create React App Documentation Below for Reference
