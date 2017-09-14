@@ -1,3 +1,15 @@
+## Goal Creator
+
+The purpose of this project is to:
+* Creat a prototype goal management app to be improved and converted to a native app later on
+* Practice writing moduler js code
+* Practice creating extremely dynamic single page apps
+* Learn ReactJS
+* Learn Bootstrap (CSS Framework)
+
+-------------------------
+## Create React App Documentation Below for Reference
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
