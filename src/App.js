@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import CreateGoal from './components/create-goal.jsx'
 import logo from './logo.svg';
 import './App.css';
 
@@ -10,13 +11,15 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to React</h2>
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-
-          <div className="">
-
+        <div className="container">
+          <div className="alert alert-success" role="alert">
+            Set your <strong>goals</strong> below
           </div>
-        </p>
+          <div className="row">
+            <CreateGoal />
+            <CreateGoal />
+          </div>
+        </div>
       </div>
     );
   }

@@ -14,8 +14,22 @@
   color: white;
 }
 
-.App-intro {
-  font-size: large;
+.container {
+  margin-top: 20px;
+}
+
+.panel-title {
+}
+
+.goal-name-literal {
+  text-align: left;
+  font-size: 20px;
+  padding: 5px 0;
+}
+
+.goal-name-literal sup {
+  float: right;
+  top: -6px;
 }
 
 @keyframes App-logo-spin {
