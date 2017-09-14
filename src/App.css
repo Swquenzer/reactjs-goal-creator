@@ -9,9 +9,12 @@
 
 .App-header {
   background-color: #222;
-  height: 150px;
   padding: 20px;
   color: white;
+}
+
+.btn {
+  cursor: pointer;
 }
 
 .container {
@@ -21,15 +24,17 @@
 .panel-title {
 }
 
+.goal-item .progress {
+  height: 10px;
+  border-radius: 0;
+}
+
 .goal-name-literal {
   text-align: left;
-  font-size: 20px;
-  padding: 5px 0;
+  font-size: 17px;
 }
 
 .goal-name-literal sup {
-  float: right;
-  top: -6px;
 }
 
 @keyframes App-logo-spin {

@@ -6,28 +6,38 @@ export default class EditGoalTitle extends Component {
 
 		this.state = {
 			inEditMode: false,
-			goalName: 'My New Goal',
-			tempGoalName: 'My New Goal'
+			currentGoalName: this.props.goalName
 		};
 	}
 
 	renderHeading() {
     	if(this.state.inEditMode) {
 			return (
-				<div className="input-group">
-					<input type="text" className="form-control" defaultValue={this.state.goalName} onKeyPress={(evt) => this.onKeyPressHandler(evt)} onChange={(evt) => this.updateTempGoalName(evt)} rel="goal-name-input" />
+				<div className="input-group pt-2 px-2">
+					<input 	type="text" 
+							className="form-control" 
+							autoFocus="autofocus" 
+							onFocus={this.handleFocus} 
+							defaultValue={this.props.goalName} 
+							onKeyPress={(evt) => this.updatecurrentGoalName(evt)} 
+							onChange={(evt) => this.updatecurrentGoalName(evt)}
+							rel="goal-name-input" />
 					<div className="input-group-btn">
-						<button className="btn btn-success" onClick={this.saveGoalNameHandler.bind(this)}>Update <span className="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+						<button	className="btn btn-success" onClick={this.saveGoalNameHandler.bind(this)}>
+							Update <span className="glyphicon glyphicon-plus" aria-hidden="true"></span>
+						</button>
 					</div>
 				</div>
 			);
 		} else {
 			return (
-				<div>
-					<div className="goal-name-literal">
-						{this.state.goalName}
-						<sup className="btn btn-warning" onClick={this.editGoalNameHandler.bind(this)}>Change Name</sup>
+				<div className="goal-name-literal pt-3 pb-0 px-2">
+					<div className="float-left pl-2">
+						{this.props.goalName}
 					</div>
+					<sup className="btn btn-primary float-right" onClick={this.editGoalNameHandler.bind(this)}>
+						Change Name
+					</sup>
 				</div>
 			);
 		}
@@ -41,29 +51,28 @@ export default class EditGoalTitle extends Component {
 	    );
   	}
 
+  	handleFocus(e) {
+  		e.target.select();
+  	}
+
   	saveGoalNameHandler() {
-  		console.log(this.rels)
-  		this.setState({goalName: this.state.tempGoalName})
+  		//this.setState({goalName: this.state.currentGoalName})
   		this.setState({inEditMode: false})
 
   		//lift state
-  		this.props.updateGoalName(this.state.tempGoalName)
-  	}
-
-  	onKeyPressHandler(evt) {
-  		this.setState({tempGoalName: evt.target.value});
-
-  		if(evt.key === 'Enter'){
-	    	this.saveGoalNameHandler();
-	  	}
+  		this.props.updateGoalName(this.state.currentGoalName);
   	}
 
   	editGoalNameHandler() {
   		this.setState({inEditMode: true})
   	}
 
-  	updateTempGoalName(evt) {
-  		this.setState({tempGoalName: evt.target.value});
+  	updatecurrentGoalName(evt) {
+  		this.setState({currentGoalName: evt.target.value});
+
+  		if(evt.key === 'Enter'){
+	    	this.saveGoalNameHandler();
+	  	}
   	}
 }
 
