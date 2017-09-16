@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import EditGoalTitle from './edit-goal-title.jsx';
-
-
-
-
 export default class GoalItem extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+
+    };
+  }
+
   render() {
     return (
-      <div className="goal-item col-md-4 mb-2">
+      <div className="goal-item col-md-6 mb-2">
         <div className="card">
           <div className="card-header p-0">
             <EditGoalTitle updateGoalName={goalName => this.updateGoalName(goalName)} goalName={this.props.goalItem.goalName} />            
@@ -19,7 +23,7 @@ export default class GoalItem extends Component {
             <ul className="list-group mb-0 text-left">
               <li className="list-group-item">
                 <label htmlFor="topic-selector">Area of Interest</label>
-                <select className="form-control" id="topic-selector">
+                <select className="form-control" id="topic-selector" onChange={(e) => this.updateGoalInterest(e)} value={this.props.goalItem.goalInterest}>
                   <option>Personal Improvement</option>
                   <option>Professional Improvement</option>
                   <option>Social Skills</option>
@@ -33,7 +37,19 @@ export default class GoalItem extends Component {
     );
   }
 
+  updateGoalInterest(e) {
+    console.log(this.props.goalItem);
+    let goalItem = this.props.goalItem;
+    console.log(this.props.goalItem);
+    goalItem.goalInterest = e.target.value;
+    console.log(this.props.goalItem);
+    this.props.updateGoalItem(goalItem);
+    console.log(this.props.goalItem);
+  }
+
   updateGoalName(goalName) {
-    this.props.updateGoalItem({goalName: goalName});
+    let goalItem = this.props.goalItem;
+    goalItem.goalName = goalName;
+    this.props.updateGoalItem(goalItem);
   }
 }
