@@ -27,14 +27,9 @@ class App extends Component {
     );
   }
 
-  updateGoal(goalItem) {
-
-  }
-
-  addNewGoal(newGoal) {
+  addNewGoal() {
     this.goalList.createGoalItem();
   }
-
 }
 
 export default App;

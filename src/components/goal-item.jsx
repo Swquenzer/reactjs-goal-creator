@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import EditGoalTitle from './edit-goal-title.jsx';
 
-
-
-
 export default class GoalItem extends Component {
   render() {
     return (
