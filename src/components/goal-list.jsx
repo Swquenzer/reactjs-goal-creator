@@ -5,7 +5,7 @@ import CloneDeep from 'lodash.clonedeep'
 const INITIAL_GOAL_ITEM = {
   goalName: 'My Goal item',
   goalProgress: 0,
-  goalTopic: 'Personal Improvement'
+  goalInterest: 'Personal Improvement'
 };
 
 export default class GoalList extends Component {
@@ -21,7 +21,20 @@ export default class GoalList extends Component {
     return (
         <div className="row">
           {
-            this.state.goalItems.map((goalItem, index) => {
+            this.state.goalItems.filter((goalItem) => {
+              let showGoal = true;
+
+              //Filter by "Interest"
+              if(this.props.filters.interestFilter && this.props.filters.interestFilter !== goalItem.goalInterest) {
+                showGoal = false;
+              }
+
+              //TODO: Other Filters
+
+              //Return
+              return showGoal;
+            })
+            .map((goalItem, index) => {
               return (<GoalItem key={index} goalItem={CloneDeep(goalItem)} updateGoalItem={this.updateGoalItem.bind(this, index)} />);
             })
           }
@@ -33,12 +46,12 @@ export default class GoalList extends Component {
     let goalItems = [...this.state.goalItems]
 
     goalItems.push(INITIAL_GOAL_ITEM);
-    this.setState({goalItems: goalItems})
-
-    //Trigger onGoalAdded event
-    if(typeof this.props.onGoalAdded === 'function') {
-      this.props.onGoalAdded(this.state.goalItems.length);
-    }
+    this.setState({goalItems: goalItems}, function() {
+      //Trigger onGoalAdded event
+      if(typeof this.props.onGoalAdded === 'function') {
+        this.props.onGoalAdded(this.state.goalItems.length);
+      }
+    })
   }
 
   updateGoalItem(index, goalItem) {

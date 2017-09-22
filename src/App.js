@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
-import GoalList from './components/goal-list.jsx'
+import GoalList from './components/goal-list.jsx';
+import GoalFilters from './components/goal-filters';
 import logo from './logo.svg';
 import './App.css';
+import CloneDeep from 'lodash.clonedeep'
 
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      numGoals: 0
+      numGoals: 0,
+      goalFilters: {
+        interestFilter: null,
+        otherFilter: null
+      }
     }
   }
 
@@ -30,12 +36,13 @@ class App extends Component {
           </div>
           <div  className="row">
             <div className="col-lg-8">
-              <GoalList ref={(list) => {this.goalList = list}} onGoalAdded={this.updateNumGoals.bind(this)} />
+              <GoalList ref={(list) => {this.goalList = list}} onGoalAdded={this.updateNumGoals.bind(this)} filters={this.state.goalFilters} />
             </div>
             <div className="col-lg-4">
               <ul className="list-group">
                 <li className="list-group-item">Number of total goals: {this.state.numGoals}</li>
               </ul>
+              <GoalFilters filters={this.state.goalFilters} setInterestFilter={filterType => this.setInterestFilter.call(this, filterType)} clearFilter={filterType => this.clearFilter.call(this, filterType)} />
             </div>
           </div>          
         </div>
@@ -50,6 +57,22 @@ class App extends Component {
    updateNumGoals(numGoals) {
       this.setState({numGoals});
    }
+
+   setInterestFilter(filter) {
+    let goalFilters = CloneDeep(this.state.goalFilters);
+    goalFilters.interestFilter = filter;
+    this.setState({goalFilters});
+   }
+
+   clearFilter(filterType) {
+    let goalFilters = CloneDeep(this.state.goalFilters);
+      switch(filterType) {
+        case "Interest":
+          goalFilters.interestFilter = null;
+          this.setState({goalFilters});
+        break;
+      }
+    }
 }
 
 export default App;
