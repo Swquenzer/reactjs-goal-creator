@@ -1,16 +1,22 @@
 import React, { Component } from 'react';
-import GoalList from './components/goal-list.jsx';
+import GoalItem from './components/goal-item.jsx'
 import GoalFilters from './components/goal-filters';
 import logo from './logo.svg';
 import './App.css';
 import CloneDeep from 'lodash.clonedeep'
+
+const INITIAL_GOAL_ITEM = {
+  goalName: 'My Goal item',
+  goalProgress: 0,
+  goalInterest: 'Personal Improvement'
+};
 
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      numGoals: 0,
+      goalItems: [],
       goalFilters: {
         interestFilter: null,
         otherFilter: null
@@ -19,8 +25,10 @@ class App extends Component {
   }
 
    componentDidMount() {
-      this.addNewGoal(); //Add first goal
+      this.createNewGoal(); //Add first goal
    }
+
+   //<GoalList ref={(list) => {this.goalList = list}} onGoalAdded={this.updateNumGoals.bind(this)} filters={this.state.goalFilters} />
 
    render() {
       return (
@@ -32,11 +40,31 @@ class App extends Component {
         <div className="container">
           <div className="alert alert-success" role="alert">
             Your <strong>Goals</strong> Dashboard
-            <button className="btn btn-success btn-sm ml-2" onClick={this.addNewGoal.bind(this)} >Create New Goal</button>
+            <button className="btn btn-success btn-sm ml-2" onClick={this.createNewGoal.bind(this)} >Create New Goal</button>
           </div>
           <div  className="row">
             <div className="col-lg-8">
-              <GoalList ref={(list) => {this.goalList = list}} onGoalAdded={this.updateNumGoals.bind(this)} filters={this.state.goalFilters} />
+              <div className="row">
+                {
+                  this.state.goalItems.filter((goalItem) => {
+                    let showGoal = true;
+
+                    //Filter by "Interest"
+                    if(this.state.goalFilters.interestFilter && this.state.goalFilters.interestFilter !== goalItem.goalInterest) {
+                      showGoal = false;
+                    }
+
+                    //TODO: Other Filters
+
+                    //Return
+                    return showGoal;
+                  })
+                  .map((goalItem, index) => {
+                    return (<GoalItem key={index} goalItem={CloneDeep(goalItem)} updateGoalItem={this.updateGoalItem.bind(this, index)} />);
+                  })
+                }
+              </div>
+              
             </div>
             <div className="col-lg-4">
               <ul className="list-group">
@@ -46,15 +74,28 @@ class App extends Component {
               </ul>
               <GoalFilters filters={this.state.goalFilters} setInterestFilter={filterType => this.setInterestFilter.call(this, filterType)} clearFilter={filterType => this.clearFilter.call(this, filterType)} />
             </div>
-          </div>          
+          </div>
         </div>
       </div>
       );
    }
 
-   addNewGoal() {
-      this.goalList.createGoalItem();
-   }
+   //list
+   createNewGoal() {
+    let goalItems = [...this.state.goalItems]
+
+    goalItems.push(INITIAL_GOAL_ITEM);
+    this.setState({goalItems: goalItems})
+  }
+
+  //list
+  updateGoalItem(index, goalItem) {
+    let goalItems = [...this.state.goalItems]
+        
+    goalItems[index] = goalItem;
+
+    this.setState({goalItems: goalItems})
+  }
 
    updateNumGoals(numGoals) {
       this.setState({numGoals});
