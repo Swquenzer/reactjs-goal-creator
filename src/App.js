@@ -68,9 +68,9 @@ class App extends Component {
             </div>
             <div className="col-lg-4">
               <ul className="list-group">
-                <li className="list-group-item">Number of total goals: {this.state.numGoals}</li>
-                <li className="list-group-item">Visible Goals: {this.state.numGoals}</li>
-                <li className="list-group-item">Hidden Goals: {this.state.numGoals}</li>
+                <li className="list-group-item">Number of total goals: {this.state.goalItems.length}</li>
+                <li className="list-group-item">Visible Goals: {this.state.goalItems.length}</li>
+                <li className="list-group-item">Hidden Goals: {0}</li>
               </ul>
               <GoalFilters filters={this.state.goalFilters} setInterestFilter={filterType => this.setInterestFilter.call(this, filterType)} clearFilter={filterType => this.clearFilter.call(this, filterType)} />
             </div>
