@@ -39,15 +39,15 @@ export default class GoalItem extends Component {
                 </select>
               </li>
               <li className="list-group-item">
-                More options go here
+                More options go here 
               </li>
               <li className="list-group-item">
                 <a data-toggle="collapse" href={"#settingsCollapse" + id} aria-expanded="false" aria-controls={"settingsCollapse" + id}>
                   Additional Options
                 </a>
-                <div id={"settingsCollapse" + id} role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
-                  <button type="button" className="btn btn-outline-danger btn-sm" onClick={this.deleteGoal}>Delete</button>
-                </div>
+                <div id={"settingsCollapse" + id} className="collapse" role="tabpanel" aria-labelledby={"headingOne" + id} data-parent="#accordion">
+                  <button type="button" className="btn btn-outline-danger btn-sm" onClick={(e) => this.deleteGoal(e)}>Delete</button>
+                </div>   
               </li>
             </ul>
           </div>
@@ -69,6 +69,8 @@ export default class GoalItem extends Component {
    }
 
    deleteGoal(e) {
-
+      let goalItem = this.props.goalItem;
+      goalItem.isActive = false;
+      this.props.updateGoalItem(goalItem);
    }
 }

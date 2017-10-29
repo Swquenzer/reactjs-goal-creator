@@ -5,9 +5,11 @@ import _CloneDeep from 'lodash.clonedeep'
 import _IsEqual from 'lodash.isequal'
 
 const INITIAL_GOAL_ITEM = {
+   id: 1,
    goalName: 'My Goal item',
    goalProgress: 0,
-   goalInterest: 'Personal Improvement'
+   goalInterest: 'Personal Improvement',
+   isActive: true
 };
 
 export default class GoalsPage extends Component {
@@ -29,15 +31,19 @@ export default class GoalsPage extends Component {
       if (cachedGoalItems != null && cachedGoalItems.length) {
          this.setState({ goalItems: cachedGoalItems });
       } else {
-         this.createNewGoal(); //Add first goal
+         //this.createNewGoal(); //Add first goal
       }
    }
 
    componentDidUpdate(prevProps, prevState) {
+      //console.log(JSON.parse(localStorage.getItem('goalList')));
+
       //If any goals have changed, save to the database (local storage)
       if (!_IsEqual(prevState.goalItems, this.state.goalItems)) {
          localStorage.setItem('goalList', JSON.stringify(this.state.goalItems));
       }
+
+      console.log(this.state.goalItems);
    }
 
    render() {
@@ -64,8 +70,9 @@ export default class GoalsPage extends Component {
                     //Return
                     return showGoal;
                   })
+                  .filter(g => g.isActive === true)
                   .map((goalItem, index) => {
-                    return (<GoalItem key={index} goalItem={_CloneDeep(goalItem)} updateGoalItem={this.updateGoalItem.bind(this, index)} />);
+                    return (<GoalItem key={goalItem.id} goalItem={_CloneDeep(goalItem)} updateGoalItem={this.updateGoalItem.bind(this, index)} />);
                   })
                 }
               </div>
@@ -85,7 +92,10 @@ export default class GoalsPage extends Component {
               	</div>
               </div>
             </div>
-          </div> 
+          </div>
+          <div>
+            <button onClick={this.clearCache}>Clear Cache</button>
+          </div>
          </div>
       );
    }
@@ -94,7 +104,10 @@ export default class GoalsPage extends Component {
    createNewGoal() {
       let goalItems = [...this.state.goalItems]
 
-      goalItems.push(INITIAL_GOAL_ITEM);
+      let newGoalItem = _CloneDeep(INITIAL_GOAL_ITEM);
+      newGoalItem.id = this.state.goalItems.length + 1;
+
+      goalItems.push(newGoalItem);
       this.setState({ goalItems: goalItems })
    }
 
@@ -125,5 +138,10 @@ export default class GoalsPage extends Component {
             this.setState({ goalFilters });
             break;
       }
+   }
+
+   clearCache() {
+     console.log("Clearing Cache");
+     localStorage.setItem('goalList', JSON.stringify([]));
    }
 }
