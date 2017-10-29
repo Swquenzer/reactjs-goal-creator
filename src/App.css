@@ -13,12 +13,20 @@
   color: white;
 }
 
+.container {
+  margin-top: 20px;
+}
+
+.primary-col {
+  border-right: 1px solid rgba(0,0,0,.125);
+}
+
 .btn {
   cursor: pointer;
 }
 
-.container {
-  margin-top: 20px;
+.d-inline-flex .badge {
+  line-height: unset;
 }
 
 .panel-title {
@@ -35,6 +43,13 @@
 }
 
 .goal-name-literal sup {
+}
+
+footer {
+  margin-top: 10px;
+  padding: 15px;
+  color: white;
+  background-color: #222;
 }
 
 @keyframes App-logo-spin {
