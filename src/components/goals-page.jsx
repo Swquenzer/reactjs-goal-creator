@@ -114,9 +114,9 @@ export default class GoalsPage extends Component {
    //list
    updateGoalItem(index, goalItem) {
       let goalItems = [...this.state.goalItems]
-
-      goalItems[index] = goalItem;
-
+      const goalItemIndex = goalItems.findIndex(g => g.id === goalItem.id);
+      
+      goalItems[goalItemIndex] = goalItem;
       this.setState({ goalItems: goalItems })
    }
 
