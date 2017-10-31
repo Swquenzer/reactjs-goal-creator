@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import EditGoalTitle from './edit-goal-title.jsx';
 import _UniqueID from 'lodash.uniqueid';
 
-export default class GoalItem extends Component {
+export default class EditableGoalItem extends Component {
    constructor(props) {
       super(props);
 

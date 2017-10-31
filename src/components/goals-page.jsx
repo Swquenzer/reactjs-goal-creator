@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import GoalItem from './goal-item.jsx'
+import EditableGoalItem from './editable-goal-item.jsx'
 import GoalFilters from './goal-filters';
 import _CloneDeep from 'lodash.clonedeep'
 import _IsEqual from 'lodash.isequal'
@@ -61,7 +61,7 @@ export default class GoalsPage extends Component {
                   this.state.goalItems
                   .filter(g => g.isActive === true && (this.state.goalFilters.interestFilter === null || g.goalInterest === this.state.goalFilters.interestFilter))
                   .map((goalItem, index) => {
-                    return (<GoalItem key={goalItem.id} goalItem={_CloneDeep(goalItem)} updateGoalItem={this.updateGoalItem.bind(this)} />);
+                    return (<EditableGoalItem key={goalItem.id} goalItem={_CloneDeep(goalItem)} updateGoalItem={this.updateGoalItem.bind(this)} />);
                   })
                 }
               </div>

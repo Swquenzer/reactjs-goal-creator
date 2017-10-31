@@ -19,7 +19,7 @@ class App extends Component {
               <a className="nav-link" href="#home" data-toggle="tab" role="tab">Home</a>
             </li>
             <li className="nav-item">
-              <a className="nav-link active" href="#goals" data-toggle="tab" role="tab">Goals</a>
+              <a className="nav-link active" href="#goal-editor" data-toggle="tab" role="tab">Goal Editor</a>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="#vault" data-toggle="tab" role="tab">Vault</a>
@@ -28,7 +28,7 @@ class App extends Component {
         </header>
         <div className="tab-content">
           <div className="tab-pane" id="home" role="tabpanel"></div>
-          <div className="tab-pane active" id="goals" role="tabpanel">
+          <div className="tab-pane active" id="goal-editor" role="tabpanel">
             <GoalsPage />
           </div>
           <div className="tab-pane" id="vault" role="tabpanel"></div>
