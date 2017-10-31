@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import CloneDeep from 'lodash.clonedeep'
 import GoalsPage from './components/goals-page.jsx'
+import VaultPage from './components/vault-page.jsx'
 import logo from './logo.svg';
 import './App.css';
+
 
 
 class App extends Component {
@@ -31,7 +33,9 @@ class App extends Component {
           <div className="tab-pane active" id="goal-editor" role="tabpanel">
             <GoalsPage />
           </div>
-          <div className="tab-pane" id="vault" role="tabpanel"></div>
+          <div className="tab-pane" id="vault" role="tabpanel">
+            <VaultPage />
+          </div>
         </div>
       </div>
       );
