@@ -8,6 +8,7 @@ const INITIAL_GOAL_ITEM = {
    id: 1,
    goalName: 'My Goal item',
    goalProgress: 0,
+   goalTarget: 0,
    goalInterest: 'Personal Improvement',
    isActive: true
 };
@@ -28,7 +29,7 @@ export default class GoalsPage extends Component {
    }
 
    componentDidMount() {
-      //Restore goals from database
+      //API CALL: Restore goals from database
       let cachedGoalItems = JSON.parse(localStorage.getItem('goalList'));
       if (cachedGoalItems != null && cachedGoalItems.length) {
          this.setState({ goalItems: cachedGoalItems }, this.updateStatCounter);

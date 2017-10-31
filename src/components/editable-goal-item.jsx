@@ -12,7 +12,7 @@ export default class EditableGoalItem extends Component {
    }
 
    componentWillMount() {
-      const id = _UniqueID("prefix-");
+      const id = _UniqueID("-");
       this.setState({ id: id });
    }
 
@@ -25,21 +25,26 @@ export default class EditableGoalItem extends Component {
             <EditGoalTitle updateGoalName={goalName => this.updateGoalName(goalName)} goalName={this.props.goalItem.goalName} />            
           </div>
           <div>
-            <div className="progress">
+            <div className="progress" style={{'display': 'none'}}>
               <div className="progress-bar progress-bar-striped" role="progressbar" style={{'width': '80%'}}  aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
             <ul className="list-group list-group-flush mb-0 text-left">
               <li className="list-group-item">
-                <label htmlFor="topic-selector">Area of Interest</label>
-                <select className="form-control" id="topic-selector" onChange={(e) => this.updateGoalInterest(e)} value={this.props.goalItem.goalInterest}>
+                <div className="form-group row mb-0">
+                  <label htmlFor="goal-target-input" className="col-5 col-form-label">Target Streak</label>
+                  <input id={"goal-target" + id} className="col-7 form-control form-control-sm" min="0" max="365" type="number" value={this.props.goalItem.goalTarget} onChange={(e) => this.updateGoalTarget(e)} />
+                </div>
+              </li>
+              <li className="list-group-item">
+              <div className="form-group row mb-0">
+                <label htmlFor="topic-selector" className="col-5">Area of Interest</label>
+                <select className="col-7 form-control form-control-sm" id="topic-selector" value={this.props.goalItem.goalInterest} onChange={(e) => this.updateGoalInterest(e)}>
                   <option>Personal Improvement</option>
                   <option>Professional Improvement</option>
                   <option>Social Skills</option>
                   <option>Other</option>
                 </select>
-              </li>
-              <li className="list-group-item">
-                More options go here 
+                </div>
               </li>
               <li className="list-group-item">
                 <a data-toggle="collapse" href={"#settingsCollapse" + id} aria-expanded="false" aria-controls={"settingsCollapse" + id}>
@@ -54,6 +59,12 @@ export default class EditableGoalItem extends Component {
         </div>
       </div>
       );
+   }
+
+   updateGoalTarget(e) {
+      let goalItem = this.props.goalItem;
+      goalItem.goalTarget = e.target.value;
+      this.props.updateGoalItem(goalItem);  
    }
 
    updateGoalInterest(e) {
