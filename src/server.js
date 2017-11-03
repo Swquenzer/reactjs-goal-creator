@@ -2,7 +2,7 @@
  
 import path from "path";
 import {createExpressServer} from "create-react-server";
-import app from "./app";
+import app from "./index";
  
 createExpressServer({
     port: process.env.PORT || 45649,
