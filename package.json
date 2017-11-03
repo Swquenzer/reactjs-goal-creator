@@ -13,12 +13,16 @@
     "react-scripts": "^1.0.14"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "express": "^4.16.2",
     "flightplan": "^0.6.17",
     "fly": "^2.0.6"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && npm run build-server",
+    "build-server": "NODE_ENV=production babel --source-maps --out-dir build-lib src",
+    "server": "node ./build-lib/server.js",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
